@@ -1,27 +1,15 @@
 Rails.application.config.after_initialize do
-  # Store associations
-  Spree::Store.class_eval do
-    has_many :posts, class_name: 'Spree::Post', dependent: :destroy, inverse_of: :store
-    has_many :post_categories, class_name: 'Spree::PostCategory', dependent: :destroy, inverse_of: :store
+  # Dependencies
+  Spree::Dependencies.posts_finder = 'Spree::Posts::Find'
+  Spree::Dependencies.posts_sorter = 'Spree::Posts::Sort'
 
-    after_create :ensure_default_post_categories_are_created
-
-    private
-
-    def ensure_default_post_categories_are_created
-      Spree::Events.disable do
-        [
-          I18n.t('spree.default_post_categories.resources', default: 'Resources'),
-          I18n.t('spree.default_post_categories.articles', default: 'Articles'),
-          I18n.t('spree.default_post_categories.news', default: 'News')
-        ].each do |category_title|
-          next if post_categories.where(title: category_title).exists?
-
-          post_categories.create(title: category_title)
-        end
-      end
-    end
+  if defined?(Spree::Api)
+    Spree::Api::Dependencies.storefront_posts_finder = 'Spree::Posts::Find'
+    Spree::Api::Dependencies.storefront_posts_sorter = 'Spree::Posts::Sort'
   end
+
+  # Metafields
+  Rails.application.config.spree.metafields.enabled_resources.push(Spree::Post, Spree::PostCategory)
 
   # Admin navigation
   if defined?(Spree::Admin)
