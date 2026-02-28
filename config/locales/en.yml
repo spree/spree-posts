@@ -1,0 +1,15 @@
+---
+en:
+  spree:
+    all_posts: All posts
+    all_posts_with_tag: All posts with tag
+    blog: Blog
+    blogs_posts: Blogs posts
+    default_post_categories:
+      articles: Articles
+      news: News
+      resources: Resources
+    new_post: New Post
+    new_post_category: New Post Category
+    post_categories: Post categories
+    posts: Posts
