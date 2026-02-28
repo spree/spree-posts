@@ -1,16 +1,11 @@
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
-  "https://github.com/#{repo_name}.git"
-end
-
 gem 'rails-controller-testing'
 
 spree_opts = if ENV['SPREE_PATH']
                 { 'path': ENV['SPREE_PATH'] }
              else
-                { 'path': '../spree/spree' }
+                { 'github': 'spree/spree', 'branch': 'main', 'glob': 'spree/**/*.gemspec' }
              end
 gem 'spree', spree_opts
 gem 'spree_admin', spree_opts

@@ -1,6 +1,6 @@
 # Spree Posts
 
-This is a Posts extension for [Spree Commerce](https://spreecommerce.org), an open source e-commerce platform built with Ruby on Rails.
+This is a Posts extension for [Spree Commerce](https://spreecommerce.org)
 
 ## Installation
 
