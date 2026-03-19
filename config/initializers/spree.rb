@@ -12,7 +12,7 @@ Rails.application.config.after_initialize do
   Rails.application.config.spree.metafields.enabled_resources.push(Spree::Post, Spree::PostCategory)
 
   # Admin navigation
-  if defined?(Spree::Admin)
+  if defined?(Spree::Admin) && Spree.respond_to?(:admin)
     sidebar_nav = Spree.admin.navigation.sidebar
 
     sidebar_nav.add :posts,
